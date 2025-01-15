@@ -6,6 +6,7 @@ public class AppHw3 {
         checkSign(1, 2, -33);
         selectColor();
         compareNumbers();
+        addOrSubtractAndPrint(1,2,true);
     }
 
     public static void greetings() {
@@ -23,7 +24,7 @@ public class AppHw3 {
     }
 
     public static void selectColor() {
-        int data = 21;
+        int data = 15;
         if (data <= 10) {
             System.out.println("Красный");
         } else if (data > 10 && data <= 20) {
@@ -39,6 +40,13 @@ public class AppHw3 {
             System.out.println("a>=b");
         } else {
             System.out.println("a<b");
+        }
+    }
+    public static void addOrSubtractAndPrint(int initValue, int delta, boolean increment) {
+        if (increment) {
+            System.out.println(initValue + delta);
+        } else {
+            System.out.println(initValue - delta);
         }
     }
 }
