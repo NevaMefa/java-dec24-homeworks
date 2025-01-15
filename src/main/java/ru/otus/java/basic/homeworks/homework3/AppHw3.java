@@ -5,6 +5,7 @@ public class AppHw3 {
         greetings();
         checkSign(1, 2, -33);
         selectColor();
+        compareNumbers();
     }
 
     public static void greetings() {
@@ -31,5 +32,13 @@ public class AppHw3 {
             System.out.println("Зеленый");
         }
     }
-
+    public static void compareNumbers() {
+        int a = 3;
+        int b = 2;
+        if (a >= b){
+            System.out.println("a>=b");
+        } else {
+            System.out.println("a<b");
+        }
+    }
 }
