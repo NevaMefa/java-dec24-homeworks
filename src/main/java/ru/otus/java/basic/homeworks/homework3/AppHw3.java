@@ -21,7 +21,7 @@ public class AppHw3 {
         } else if (met == 4) {
             compareNumbers();
         } else if (met == 5) {
-            addOrSubtractAndPrint(1,2, true);
+            addOrSubtractAndPrint(1, 2, true);
         } else
             System.out.println("Такого метода не существует");
 
