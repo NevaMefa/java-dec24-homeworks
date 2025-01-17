@@ -21,7 +21,7 @@ public class AppHw3 {
         } else if (met == 4) {
             compareNumbers();
         } else if (met == 5) {
-            addOrSubtractAndPrint();
+            addOrSubtractAndPrint(2, 3, false);
         } else
             System.out.println("Такого метода не существует");
 
@@ -67,10 +67,7 @@ public class AppHw3 {
     }
 
     //5. Метод сложения или вычитания
-    public static void addOrSubtractAndPrint() {
-        int initValue = (int) (Math.random() * 100);
-        int delta = (int) (Math.random() * 50);
-        boolean increment = Math.random() < 0.5;
+    public static void addOrSubtractAndPrint(int initValue, int delta, boolean increment) {
         if (increment) {
             System.out.println(initValue + delta);
         } else {
