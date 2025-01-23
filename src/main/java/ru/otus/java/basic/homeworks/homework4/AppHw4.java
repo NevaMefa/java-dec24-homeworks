@@ -15,8 +15,9 @@ public class AppHw4 {
     }
 
     public static void first(int count, String text) {
-        for (int i = 0; i < count; i++)
+        for (int i = 0; i < count; i++) {до
             System.out.println(i + ". " + text);
+        }
     }
 
     public static void sumNumbers(int... array) {

@@ -4,5 +4,6 @@ targer/
 *.iws
 *.iml
 *.ipr
+*.class
 ### Mac OS ###
 .DS_Store
