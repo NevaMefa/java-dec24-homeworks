@@ -12,7 +12,9 @@ public class AppHw4 {
 //        newNumbMassiv(5, arr1);
 //        compNumb(arr1);
 //        sumMet();
-        findEqual(5, 1, 1, 1, 1, 1);
+//        findEqual(5, 1, 1, 1, 1, 2);
+        compareInc();
+        mirrorMass();
     }
 
     public static void first(int count, String text) {
@@ -91,5 +93,31 @@ public class AppHw4 {
                 }
             }
         }
+    }
+
+    // проверка возрастания или убывания массива
+    public static void compareInc() {
+        int[] arr = {3, 2, 3, 4, 5};
+        for (int i = 0; i < arr.length - 2; i++) {
+            if (arr[i] < arr[i + 1]) {
+                System.out.println("Массив возрастающий");
+                break;
+            } else {
+                if (arr[i] > arr[i + 1]) {
+                    System.out.println("Массив убывающий");
+                    break;
+                }
+            }
+        }
+    }
+
+    // отзеркаливание массива
+    public static void mirrorMass() {
+        int[] arr = {1, 2, 3};
+        for (int i = 0; i < arr.length; i++) {
+
+            System.out.println(i);
+        }
+
     }
 }
