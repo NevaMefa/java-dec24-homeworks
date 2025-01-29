@@ -1,8 +1,9 @@
 ### IntelliJ IDEA ###
 .idea/
-targer/
+target/
 *.iws
 *.iml
 *.ipr
+*.class
 ### Mac OS ###
 .DS_Store
