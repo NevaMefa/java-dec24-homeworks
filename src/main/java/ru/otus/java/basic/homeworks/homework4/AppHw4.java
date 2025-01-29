@@ -97,15 +97,15 @@ public class AppHw4 {
 
     // проверка возрастания или убывания массива
     public static void compareInc() {
-        int[] arr = {3, 2, 3, 4, 5};
-        for (int i = 0; i < arr.length - 2; i++) {
+        int[] arr = {1, 2, 3};
+        for (int i = 0; i < arr.length - 1; i++) {
             if (arr[i] < arr[i + 1]) {
-                System.out.println("Массив возрастающий");
-                break;
+                System.out.println("Массив возврастающий");
+                return;
             } else {
                 if (arr[i] > arr[i + 1]) {
                     System.out.println("Массив убывающий");
-                    break;
+                    return;
                 }
             }
         }
