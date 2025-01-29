@@ -13,7 +13,7 @@ public class AppHw4 {
 //        compNumb(arr1);
 //        sumMet();
 //        findEqual(5, 1, 1, 1, 1, 2);
-        compareInc();
+//        compareInc();
         mirrorMass();
     }
 
@@ -113,11 +113,13 @@ public class AppHw4 {
 
     // отзеркаливание массива
     public static void mirrorMass() {
-        int[] arr = {1, 2, 3};
-        for (int i = 0; i < arr.length; i++) {
-
-            System.out.println(i);
+        int[] arr = {1, 2, 3, 4, 5};
+        int table = 0;
+        for (int i = 0; i < arr.length / 2; i++) {
+            table = arr[i];
+            arr[i] = arr[arr.length - 1 - i];
+            arr[arr.length - 1 - i] = table;
         }
-
+        System.out.println(Arrays.toString(arr));
     }
 }
