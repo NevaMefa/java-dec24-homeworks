@@ -3,12 +3,15 @@ package ru.otus.java.basic.homeworks.homework5hard;
 import java.util.Arrays;
 
 public class AppHwHard {
-    public static void main(String[] args){
-      sumMet();
-      findEqual();
-      compareInc();
-      mirrorMass();
+    public static void main(String[] args) {
+        int[] arr = {1, 2, 3, 4, 5};
+        int[] array = {1, 2, 3};
+        sumMet();
+        findEqual(array);
+        compareInc(arr);
+        mirrorMass();
     }
+
     // заданиние со звездой
     public static void sumMet() {
         int[] met1 = {1, 2, 3};
@@ -42,8 +45,7 @@ public class AppHwHard {
     }
 
     // проверка возрастания или убывания массива
-    public static void compareInc() {
-        int[] arr = {1, 2, 3};
+    public static void compareInc(int[] arr) {
         for (int i = 0; i < arr.length - 1; i++) {
             if (arr[i] < arr[i + 1]) {
                 System.out.println("Массив возврастающий");
