@@ -15,7 +15,15 @@ public class AppHw6 {
         new User("Belov", "Igor", "Nikolaevich", 1997, "user8@test.ru"),
         new User("Svetlov", "Nikolai", "Gennadevich", 1996, "user9@test.ru"),
         new User("Michailov", "Leonid", "Evgenevich", 1995, "user10@test.ru")};
+
+
+    }
+public static void searchOldMan(int[] users){
+    for (int i = 0; i < users.length; i++) {
+        users[i] = i;
+        System.out.println(users[i]);
     }
 
+}
 }
 
