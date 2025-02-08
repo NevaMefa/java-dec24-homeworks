@@ -23,7 +23,7 @@ public class AppHw6 {
         int searchYear = currentYear - age;
         for (int i = 0; i < users.length; i++) {
             User user = users[i];
-            if (user.yearBirth < searchYear) {
+            if (user.getYearBirth() < searchYear) {
                 user.info();
             }
         }

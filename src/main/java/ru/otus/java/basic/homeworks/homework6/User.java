@@ -4,7 +4,7 @@ public class User {
     private String surname;
     private String name;
     private String patronymic;
-    public int yearBirth;
+    private int yearBirth;
     private String email;
 
 
@@ -18,6 +18,10 @@ public class User {
 
     public void info() {
         System.out.println("ФИО: " + surname + " " + name + " " + patronymic + "\nГод рождения: " + yearBirth + "\ne-mail: " + email);
+    }
+
+    public int getYearBirth() {
+        return this.yearBirth;
     }
 
 }
