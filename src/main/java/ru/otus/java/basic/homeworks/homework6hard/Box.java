@@ -5,21 +5,20 @@ import java.util.Scanner;
 public class Box {
     private int size;
     private String color;
-    public boolean isOpened;
-    public String item;
+    private boolean isOpened;
+    private String item;
     Scanner scanner = new Scanner(System.in);
 
-    public void setItem() {
+    public void setItem(String item) {
         if (isOpened) {
             if (this.size == 0) {
                 System.out.println("В коробке нет места, вещь не положить");
             } else {
-                System.out.println("Коробка открыта, положите вещь");
-                this.item = scanner.nextLine();
+                this.item = item;
                 System.out.println("Вы положили " + this.item);
                 size--;
             }
-        } else if (!isOpened) {
+        } else {
             System.out.println("Коробка закрыта, вещь не положить");
         }
     }
@@ -32,7 +31,7 @@ public class Box {
                 this.item = null;
                 System.out.println("Предмет " + item + "Убран");
             }
-        } else if (!isOpened) {
+        } else {
             System.out.println("Коробка закрыта, вещь не убрать");
         }
     }
@@ -65,7 +64,7 @@ public class Box {
     public void info() {
         if (isOpened) {
             System.out.println("Размер " + size + " Цвет " + color + " " + "Коробка открыта" + " в ней " + item);
-        } else if (!isOpened) {
+        } else {
             System.out.println("Размер " + size + " Цвет " + color + " " + " Коробка закрыта");
 
         }
