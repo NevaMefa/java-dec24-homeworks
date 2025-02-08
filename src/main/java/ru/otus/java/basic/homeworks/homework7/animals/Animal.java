@@ -5,4 +5,14 @@ public class Animal {
     int speedRun;
     int endurance;
     int expEndurance;
+
+    public void info() {
+        System.out.println(name + " " + speedRun + " " + endurance + " " + expEndurance);
+    }
+    public void run(int distance){
+
+    }
+    public void swim(int distance){
+
+    }
 }
