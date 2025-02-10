@@ -6,15 +6,16 @@ import ru.otus.java.basic.homeworks.homework7.animals.Horse;
 
 public class AppHw7 {
     public static void main(String[] args) {
-        Cat cat = new Cat("Barsik", 5,5,  100);
-        Dog dog = new Dog("Belka", 8,8,100);
-        Horse horse = new Horse("Wild", 10,10,100);
+        Cat cat = new Cat("Barsik", 5, 5, 100);
+        Dog dog = new Dog("Belka", 8, 8, 100);
+        Horse horse = new Horse("Wild", 10, 10, 100);
+        cat.swim(10);
         cat.info();
-        cat.run(5);
+        dog.swim(50);
         dog.info();
-        dog.run(5);
+        horse.run(40);
         horse.info();
-        horse.run(5);
+
 
     }
 }

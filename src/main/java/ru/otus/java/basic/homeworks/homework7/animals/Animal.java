@@ -2,22 +2,36 @@ package ru.otus.java.basic.homeworks.homework7.animals;
 
 public class Animal {
     String name;
-    int speedRun;
-    int speedSwim;
-    int endurance;
-    int expEndurance;
+    int speedRun; // м/с
+    int speedSwim; // м/с
+    int endurance; // выносливость
+    double time;
 
     public void info() {
-        System.out.println(name + " " + speedRun + " " + speedSwim + " " + endurance);
+        System.out.println("Имя " + name + " Скорость бега(м/с) " + speedRun + " Скорость плавания(м/с) " + speedSwim + " Выносливость " + endurance);
     }
 
 
     public void run(int distance) {
         this.endurance = endurance - distance;
-        System.out.println(name + " побежал на " + distance + endurance );
+        if (this.endurance <= 0) {
+            this.time = -1;
+            System.out.println(name + " im so tired, время: " + this.time);
+        } else {
+            this.time = distance / speedRun;
+            System.out.println(name + " пробежал расстояние " + distance + " за(м/с) " + time + " Выносливость " + endurance);
+        }
     }
 
     public void swim(int distance) {
-        System.out.println("Животное плывет");
+        this.endurance = endurance - (distance * 2);
+        if (this.endurance <= 0) {
+            this.time = -1;
+            System.out.println(name + " im so tired, время: " + this.time);
+        } else {
+            this.time = distance / speedRun;
+            System.out.println(name + " проплыл расстояние " + distance + " за(м/с) " + time + " Выносливость " + endurance);
+        }
     }
 }
+

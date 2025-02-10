@@ -6,4 +6,9 @@ public class Cat extends Animal {
         this.speedRun = speedRun;
         this.endurance = endurance;
     }
+
+    @Override
+    public void swim(int distance) {
+        System.out.println("Я котик, я не плаваю");
+    }
 }
