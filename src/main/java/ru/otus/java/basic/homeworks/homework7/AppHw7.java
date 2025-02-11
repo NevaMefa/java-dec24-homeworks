@@ -11,9 +11,9 @@ public class AppHw7 {
         Horse horse = new Horse("Wild", 10, 10, 100);
         cat.swim(10);
         cat.info();
-        dog.swim(50);
+        dog.swim(30);
         dog.info();
-        horse.run(40);
+        horse.swim(20);
         horse.info();
 
 

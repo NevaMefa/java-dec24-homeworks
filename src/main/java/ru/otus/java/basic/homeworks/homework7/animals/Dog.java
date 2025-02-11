@@ -6,6 +6,7 @@ public class Dog extends Animal {
         this.speedRun = speedRun;
         this.speedSwim = speedSwim;
         this.endurance = endurance;
+        this.endurancePerSwimMeter = 2;
     }
 }
 

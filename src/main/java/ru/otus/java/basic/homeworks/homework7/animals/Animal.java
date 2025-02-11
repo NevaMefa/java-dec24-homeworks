@@ -6,6 +6,7 @@ public class Animal {
     int speedSwim; // м/с
     int endurance; // выносливость
     double time;
+    int endurancePerSwimMeter;
 
     public void info() {
         System.out.println("Имя " + name + " Скорость бега(м/с) " + speedRun + " Скорость плавания(м/с) " + speedSwim + " Выносливость " + endurance);
@@ -24,7 +25,7 @@ public class Animal {
     }
 
     public void swim(int distance) {
-        this.endurance = endurance - (distance * 2);
+        this.endurance = endurance - (distance * endurancePerSwimMeter);
         if (this.endurance <= 0) {
             this.time = -1;
             System.out.println(name + " im so tired, время: " + this.time);
