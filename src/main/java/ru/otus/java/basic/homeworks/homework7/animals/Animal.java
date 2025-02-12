@@ -13,25 +13,25 @@ public class Animal {
     }
 
 
-    public void run(int distance) {
+    public double run(int distance) {
         this.endurance = endurance - distance;
         if (this.endurance <= 0) {
-            this.time = -1;
             System.out.println(name + " im so tired, время: " + this.time);
+            return this.time = -1;
         } else {
-            this.time = distance / speedRun;
-            System.out.println(name + " пробежал расстояние " + distance + " за(м/с) " + time + " Выносливость " + endurance);
+            System.out.println(name + " пробежал расстояние " + distance + " Выносливость " + endurance);
+            return this.time = distance / speedRun;
         }
     }
 
-    public void swim(int distance) {
+    public double swim(int distance) {
         this.endurance = endurance - (distance * endurancePerSwimMeter);
         if (this.endurance <= 0) {
-            this.time = -1;
             System.out.println(name + " im so tired, время: " + this.time);
+            return this.time = -1;
         } else {
-            this.time = distance / speedRun;
-            System.out.println(name + " проплыл расстояние " + distance + " за(м/с) " + time + " Выносливость " + endurance);
+            System.out.println(name + " проплыл расстояние " + distance + " Выносливость " + endurance);
+            return this.time = distance / speedRun;
         }
     }
 }

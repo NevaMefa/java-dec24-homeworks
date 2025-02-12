@@ -13,8 +13,8 @@ public class AppHw7 {
         cat.info();
         dog.swim(30);
         dog.info();
-        horse.swim(20);
         horse.info();
+        System.out.println(horse.swim(5));
 
 
     }

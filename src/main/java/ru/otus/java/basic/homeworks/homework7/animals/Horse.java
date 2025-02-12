@@ -9,14 +9,15 @@ public class Horse extends Animal {
         this.endurancePerSwimMeter = 4;
     }
 
-    /* @Override
-    public void swim(int distance) {
+    @Override
+    public double swim(int distance) {
         this.endurance = endurance - (distance * endurancePerSwimMeter);
         if (this.endurance <= 0) {
             System.out.println("im so tired");
+            return this.time = -1;
         } else {
-            this.time = distance / speedRun;
-            System.out.println(name + " проплыл расстояние " + distance + " за(м/с) " + time + " Выносливость " + endurance);
+            System.out.println(name + " проплыл расстояние " + distance + " Выносливость " + endurance);
+            return this.time = distance / speedRun;
         }
-    }*/
+    }
 }
