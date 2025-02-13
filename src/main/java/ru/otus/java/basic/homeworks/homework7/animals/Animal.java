@@ -17,7 +17,7 @@ public class Animal {
         this.endurance = endurance - distance;
         if (this.endurance <= 0) {
             System.out.println(name + " im so tired, время: " + this.time);
-            return this.time = -1;
+            return -1;
         } else {
             System.out.println(name + " пробежал расстояние " + distance + " Выносливость " + endurance);
             return this.time = distance / speedRun;
@@ -28,7 +28,7 @@ public class Animal {
         this.endurance = endurance - (distance * endurancePerSwimMeter);
         if (this.endurance <= 0) {
             System.out.println(name + " im so tired, время: " + this.time);
-            return this.time = -1;
+            return -1;
         } else {
             System.out.println(name + " проплыл расстояние " + distance + " Выносливость " + endurance);
             return this.time = distance / speedRun;
