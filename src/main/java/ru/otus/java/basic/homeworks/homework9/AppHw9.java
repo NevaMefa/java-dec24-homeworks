@@ -10,12 +10,10 @@ public class AppHw9 {
         Car car = new Car(100);
         Bike bike = new Bike();
         Horse horse = new Horse(100);
-        car.info();
         AllVehicle allVehicle = new AllVehicle(100);
         Human human = new Human("Boris", 100);
-        human.info();
-        human.board(car);
-        human.board(horse);
+        human.board(allVehicle);
+        human.travel(10,Terrain.swamp);
 
     }
 }
