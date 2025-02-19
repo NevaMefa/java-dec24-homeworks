@@ -24,11 +24,11 @@ public class Car extends Transport {
 
     @Override
     public boolean travel(int distance, Terrain terrain) {
-        if (terrain == Terrain.swamp || terrain == Terrain.forest) {
+        if (terrain == Terrain.Swamp || terrain == Terrain.Forest) {
             System.out.println("Я не смогу тут проехать");
             return false;
         } else {
-           setFuel(this.fuel -= distance * this.fuelRate);
+            setFuel(getFuel() - (distance * this.fuelRate));
             System.out.println("Проехал " + terrain + " бензина осталось " + getFuel());
             return true;
         }

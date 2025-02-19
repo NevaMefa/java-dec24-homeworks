@@ -36,7 +36,7 @@ public class Transport {
 
 
     public boolean travel(int distance, Terrain terrain) {
-        if (this.fuel <= fuelRate * distance) {
+        if (getFuel() <= fuelRate * distance) {
             System.out.println("Проехал " + distance + "км");
             return true;
         }

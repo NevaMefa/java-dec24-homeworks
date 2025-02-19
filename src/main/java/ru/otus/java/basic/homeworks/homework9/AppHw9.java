@@ -13,7 +13,7 @@ public class AppHw9 {
         AllVehicle allVehicle = new AllVehicle(100);
         Human human = new Human("Boris", 100);
         human.board(allVehicle);
-        human.travel(10,Terrain.swamp);
+        human.travel(10, Terrain.Swamp);
 
     }
 }

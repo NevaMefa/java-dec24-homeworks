@@ -23,9 +23,6 @@ public class Human {
     }
 
 
-    public void setCurrentTransport(Transport currentTransport) {
-        this.currentTransport = currentTransport;
-    }
 
     public boolean board(Transport transport) {
         if (this.currentTransport == null) {

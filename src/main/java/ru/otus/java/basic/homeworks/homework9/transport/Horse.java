@@ -20,7 +20,7 @@ public class Horse extends Transport {
 
     @Override
     public boolean travel(int distance, Terrain terrain) {
-        if (terrain == Terrain.swamp){
+        if (terrain == Terrain.Swamp){
             System.out.println("Я не смогу тут проехать");
             return false;
         } else {

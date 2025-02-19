@@ -22,7 +22,7 @@ public class AllVehicle extends Transport {
 
     @Override
     public boolean travel(int distance, Terrain terrain) {
-            setFuel(this.fuel -= distance * this.fuelRate);
+            setFuel(getFuel() - (distance * this.fuelRate));
             System.out.println("Проехал " + terrain + " бензина осталось " + getFuel());
             return true;
     }
