@@ -34,9 +34,17 @@ public class Transport {
         return transport; // Теперь при выводе транспорта будет показываться его название
     }
 
+    public int decreaseFuel(int amount) {
+        this.fuel -= amount;
+        if (this.fuel < 0) {
+            this.fuel = 0; // Не допускаем отрицательного значения топлива
+        }
+        return this.fuel;
+    }
 
     public boolean travel(int distance, Terrain terrain) {
-        if (getFuel() <= fuelRate * distance) {
+        int fuelneed = this.fuelRate * distance;
+        if (getFuel() <= fuelneed) {
             System.out.println("Проехал " + distance + "км");
             return true;
         }

@@ -12,7 +12,6 @@ public class Car extends Transport {
     }
 
 
-
     public Car(String name) {
         super(name);
     }
@@ -24,13 +23,17 @@ public class Car extends Transport {
 
     @Override
     public boolean travel(int distance, Terrain terrain) {
-        if (terrain == Terrain.Swamp || terrain == Terrain.Forest) {
+        int fuelneed = this.fuelRate * distance;
+        if (terrain == Terrain.SWAMP || terrain == Terrain.FOREST) {
             System.out.println("Я не смогу тут проехать");
             return false;
         } else {
-            setFuel(getFuel() - (distance * this.fuelRate));
+            decreaseFuel(fuelneed);
             System.out.println("Проехал " + terrain + " бензина осталось " + getFuel());
             return true;
+
         }
     }
+
+
 }
