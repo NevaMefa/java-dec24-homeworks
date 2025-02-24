@@ -1,23 +1,46 @@
-package ru.otus.java.basic.homeworks.homework10;
-
 class AppArraySizeException extends IllegalArgumentException {
     public AppArraySizeException(String s) {
         super("Массив должен быть 4x4");
     }
 }
 
+class AppArrayDataException extends NumberFormatException {
+    public AppArrayDataException(int row, int col) {
+        super("Ошибка в ячейке: [" + row + "][" + col + "]");
+    }
+}
+
 public class AppHw10 {
+
     public static void main(String[] args) {
-        int[][] tryArray = {{1, 1, 1, 4}, {1, 1, 1, 1}, {1, 1, 1, 1}, {1, 2, 1, 3}};
-        int[][] invalidArray1 = {{1, 1, 4}, {1, 1, 1, 1}, {1, 1, 1, 1}, {1, 2, 1, 3}};
-        int[][] invalidArray = {{1, 2}, {1, 2}, {1, 2}};
-        checkArrayLenght(tryArray);
-//        checkArrayLenght(invalidArray1);
-//        checkArrayLenght(invalidArray);
+        String[][] tryArray = {
+                {"1", "2", "3", "4"},
+                {"5", "6", "7", "8"},
+                {"9", "10", "11", "12"},
+                {"13", "14", "15", "16"}
+        };
+
+        String[][] invalidArray1 = {
+                {"1", "2", "3", "4"},
+                {"5", "X", "7", "8"},
+                {"9", "10", "11", "12"},
+                {"13", "14", "15", "16"}
+        };
+
+        try {
+            System.out.println("Сумма: " + checkArrayLenght(tryArray));
+        } catch (AppArraySizeException | AppArrayDataException e) {
+            System.out.println("Ошибка: " + e.getMessage());
+        }
+
+        try {
+            System.out.println("Сумма: " + checkArrayLenght(invalidArray1));
+        } catch (AppArraySizeException | AppArrayDataException e) {
+            System.out.println("Ошибка: " + e.getMessage());
+        }
     }
 
-
-    public static void checkArrayLenght(int[][] array) {
+    public static int checkArrayLenght(String[][] array) {
         if (array.length != 4) {
             throw new AppArraySizeException("Массив должен быть 4х4");
         }
@@ -27,5 +50,16 @@ public class AppHw10 {
             }
         }
         System.out.println("Передан массив корректной длины");
+        int sum = 0;
+        for (int i = 0; i < 4; i++) {
+            for (int j = 0; j < 4; j++) {
+                try {
+                    sum += Integer.parseInt(String.valueOf(array[i][j]));
+                } catch (NumberFormatException e) {
+                    throw new AppArrayDataException(i, j);
+                }
+            }
+        }
+        return sum;
     }
 }
