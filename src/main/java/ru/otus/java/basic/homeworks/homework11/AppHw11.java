@@ -13,6 +13,16 @@ public class AppHw11 {
         System.out.println("Сумма всех элементов " + sumList(list));
         newNumbForList(list, 3);
         numbListAddOne(list, 5);
+
+        Employed employed = new Employed("Vasya", 18);
+        Employed employed1 = new Employed("Petya", 19);
+        Employed employed2 = new Employed("Vitya", 20);
+        ArrayList<Employed> employeds = new ArrayList<>();
+        employeds.add(employed);
+        employeds.add(employed1);
+        employeds.add(employed2);
+        Employed.EmpGetNames(employeds);
+
     }
 
     public static ArrayList<Integer> minMaxList(int min, int max) {
