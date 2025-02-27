@@ -53,17 +53,17 @@ public class Employed {
         return false;
     }
 
-    public static ArrayList<String> empGetUng(ArrayList<Employed> employees) {
+
+    public static Employed empGetUng(ArrayList<Employed> employees) {
         int minAge = employees.get(0).getAge();
-        Employed result = new Employed();
+        Employed result = employees.get(0);
         for (int i = 0; i < employees.size(); i++) {
-            if (employees.get(i + 1).getAge() < minAge) {
-                minAge = employees.get(i + 1).getAge();
-                result = employees.get(i + 1).getName();
+            if (employees.get(i).getAge() < minAge) {
+                minAge = employees.get(i).getAge();
+                result = employees.get(i);
             }
         }
-        System.out.println(result);
+        System.out.println(result.getName());
         return result;
     }
-
 }
