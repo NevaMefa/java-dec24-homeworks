@@ -4,24 +4,31 @@ import java.util.ArrayList;
 
 public class AppHw11 {
     public static void main(String[] args) {
-
-        minMaxList(3, 10);
-        ArrayList<Integer> list = new ArrayList<>();
-        list.add(1);
-        list.add(2);
-        list.add(3);
-        System.out.println("Сумма всех элементов " + sumList(list));
-        newNumbForList(list, 3);
-        numbListAddOne(list, 5);
+//
+//        minMaxList(3, 10);
+//        ArrayList<Integer> list = new ArrayList<>();
+//        list.add(1);
+//        list.add(2);
+//        list.add(3);
+//        System.out.println("Сумма всех элементов " + sumList(list));
+//        newNumbForList(list, 3);
+//        numbListAddOne(list, 5);
 
         Employed employed = new Employed("Vasya", 18);
         Employed employed1 = new Employed("Petya", 19);
         Employed employed2 = new Employed("Vitya", 20);
+        Employed employed3 = new Employed("Kolya", 21);
+        Employed employed4 = new Employed("Andrey", 22);
         ArrayList<Employed> employeds = new ArrayList<>();
         employeds.add(employed);
         employeds.add(employed1);
         employeds.add(employed2);
-        Employed.EmpGetNames(employeds);
+        employeds.add(employed3);
+        employeds.add(employed4);
+//        Employed.empGetNames(employeds);
+//        Employed.empGetNamesMinAge(employeds, 18);
+//        Employed.empGetNamesAverAge(employeds, 50);
+        Employed.empGetUng(employeds);
 
     }
 
