@@ -30,24 +30,19 @@ public class PersonDataBase {
 
     public boolean isManager(Person person) {
         if (Position.getManagerPos().contains(person.position)) {
-            System.out.println("Yes");
             return true;
         }
-        System.out.println("No");
         return false;
     }
 
     public boolean isEmployee(Long id) {
         Person person = personDataBase.get(id);
         if (person == null) {
-            System.out.println("No such person");
             return false;
         }
-        if (!getManagerPos().contains(person.position)) {
-            System.out.println("Yes Employee");
+        if (getEmployeePos().contains(person.position)) {
             return true;
         }
-        System.out.println("No Manager");
         return false;
     }
 
