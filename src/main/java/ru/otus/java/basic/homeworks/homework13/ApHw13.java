@@ -19,7 +19,7 @@ public class ApHw13 {
         System.out.println(people.findByld(2l));
         System.out.println(people.isManager(person2));
         System.out.println(people.isEmployee(3l));
-        int[] array = {1,5,7,9,11};
+        int[] array = {1,8,7,3,11};
         BubleSort.bubbleSort(array);
         System.out.println(Arrays.toString(array));
     }
