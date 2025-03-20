@@ -16,7 +16,7 @@ public class Client {
                 ExampleClient client = new ExampleClient(socket.getInputStream(),
                         socket.getOutputStream());
 
-                System.out.println("Выберите операцию: 1 - + , 2 - -, 3 - *, 4 - /");
+                System.out.println("Выберите операцию: + , - , * , /");
                 String userMessage = scanner.nextLine();
 
                 if (userMessage.equalsIgnoreCase("exit")) {
