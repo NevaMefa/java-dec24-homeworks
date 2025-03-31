@@ -19,7 +19,7 @@ public class AppHw16 extends Thread{
             array[i] = 1.14 * Math.cos(i) * Math.sin(i * 0.2) * Math.cos(i / 1.2);
         }
         long endTime = System.currentTimeMillis();
-        System.out.println("Время однопоточного выполнения " + (endTime - startTime) + "mc");
+        System.out.printf("Время однопоточного выполнения: %d мс\n", endTime - startTime);
     }
 
     public static <array> void multiThreadArray(){
