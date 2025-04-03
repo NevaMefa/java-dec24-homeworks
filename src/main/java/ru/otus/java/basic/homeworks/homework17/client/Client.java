@@ -7,19 +7,13 @@ import java.net.Socket;
 import java.util.Scanner;
 
 public class Client {
-    Socket socket = new Socket("localhost", 8189);
+    Socket socket = new Socket("localhost", 8186);
     DataOutputStream out = new DataOutputStream(socket.getOutputStream());
     DataInputStream in = new DataInputStream(socket.getInputStream());
 
     public Client() throws IOException {
         Scanner scanner = new Scanner(System.in);
         try {
-            System.out.print("Введите ваш ник: ");
-            String username = scanner.nextLine().trim();
-            if (username.isEmpty()) {
-                username = "User" + System.currentTimeMillis();
-            }
-            out.writeUTF(username);
 
             new Thread(() -> {
                 try {
@@ -29,12 +23,20 @@ public class Client {
                             if (message.equals("/exitok")) {
                                 break;
                             }
+                            if (message.startsWith("/authok ")) {
+                                System.out.println("Удалось успешно войти в чат под именем пользователя : " +
+                                        message.split(" ")[1]);
+                            }
+                            if (message.startsWith("/regok ")) {
+                                System.out.println("Удалось успешно зарегистрироваться и войти в чат " +
+                                        "с именем пользователя : " + message.split(" ")[1]);
+                            }
                         } else {
                             System.out.println(message);
                         }
                     }
                 } catch (IOException e) {
-                    e.printStackTrace();
+                    System.out.println("Соединение разорвано.");
                 } finally {
                     disconnect();
                 }
