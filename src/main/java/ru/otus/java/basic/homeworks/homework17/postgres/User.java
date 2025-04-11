@@ -19,9 +19,6 @@ public class User {
         this.email = email;
     }
 
-    public int getId() {
-        return id;
-    }
 
     public void setId(int id) {
         this.id = id;
@@ -37,6 +34,10 @@ public class User {
 
     public String getEmail() {
         return email;
+    }
+
+    public int getId() {
+        return id;
     }
 
     public void setEmail(String email) {

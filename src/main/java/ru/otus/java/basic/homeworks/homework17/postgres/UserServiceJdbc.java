@@ -18,10 +18,100 @@ public class UserServiceJdbc implements UserExample {
             """;
 
     private final Connection connection;
-    private static final String DATABASE_URL = "jdbc:postgresql://localhost:5432/otus-db";
+    private static final String DATABASE_URL = "jdbc:postgresql://localhost:5432/postgres";
 
     public UserServiceJdbc() throws SQLException {
-        connection = DriverManager.getConnection(DATABASE_URL, "admin", "password");
+        connection = DriverManager.getConnection(DATABASE_URL, "testuser", "testpass");
+    }
+
+    public User getUserByLoginAndPassword(String login, String password) {
+        String query = "SELECT id, email, password FROM users WHERE email = ? AND password = ?";
+        try (PreparedStatement ps = connection.prepareStatement(query)) {
+            ps.setString(1, login);
+            ps.setString(2, password);
+            try (ResultSet rs = ps.executeQuery()) {
+                if (rs.next()) {
+                    return new User(
+                            rs.getInt("id"),
+                            rs.getString("password"),
+                            rs.getString("email")
+                    );
+                }
+            }
+        } catch (SQLException e) {
+            System.err.println("Error getting user: " + e.getMessage());
+        }
+        return null;
+    }
+
+    public boolean isLoginExists(String login) {
+        String query = "SELECT COUNT(1) FROM users WHERE email = ?";
+        try (PreparedStatement stmt = connection.prepareStatement(query)) {
+            stmt.setString(1, login);
+            try (ResultSet rs = stmt.executeQuery()) {
+                if (rs.next()) {
+                    return rs.getInt(1) > 0;
+                }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return false;
+    }
+
+    public boolean isUsernameExists(String username) {
+        String query = "SELECT COUNT(1) FROM users WHERE username = ?";
+        try (PreparedStatement stmt = connection.prepareStatement(query)) {
+            stmt.setString(1, username);
+            try (ResultSet rs = stmt.executeQuery()) {
+                if (rs.next()) {
+                    return rs.getInt(1) > 0;
+                }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return false;
+    }
+
+    public int registerUser(String login, String password, String username) throws SQLException {
+        String query = "INSERT INTO users (email, password, username) VALUES (?, ?, ?) RETURNING id";
+        try (PreparedStatement stmt = connection.prepareStatement(query)) {
+            stmt.setString(1, login);
+            stmt.setString(2, password);
+            stmt.setString(3, username);
+            try (ResultSet rs = stmt.executeQuery()) {
+                if (rs.next()) {
+                    return rs.getInt(1);  // Возвращаем id нового пользователя
+                }
+            }
+        }
+        throw new SQLException("Ошибка при регистрации пользователя");
+    }
+
+    public void assignUserRole(int userId, String role) throws SQLException {
+        String query = "INSERT INTO users_to_roles (user_id, role_id) " +
+                "SELECT ?, id FROM roles WHERE name = ?";
+        try (PreparedStatement stmt = connection.prepareStatement(query)) {
+            stmt.setInt(1, userId);
+            stmt.setString(2, role);
+            stmt.executeUpdate();
+        }
+    }
+
+    public List<Role> getRolesForUser(int userId) throws SQLException {
+        List<Role> roles = new ArrayList<>();
+        String query = "SELECT r.id, r.name FROM roles r " +
+                "JOIN users_to_roles ur ON r.id = ur.role_id WHERE ur.user_id = ?";
+        try (PreparedStatement stmt = connection.prepareStatement(query)) {
+            stmt.setInt(1, userId);
+            try (ResultSet rs = stmt.executeQuery()) {
+                while (rs.next()) {
+                    roles.add(new Role(rs.getInt("id"), rs.getString("name")));
+                }
+            }
+        }
+        return roles;
     }
 
     @Override
