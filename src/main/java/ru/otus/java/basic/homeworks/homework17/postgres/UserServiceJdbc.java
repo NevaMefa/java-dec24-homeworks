@@ -16,7 +16,19 @@ public class UserServiceJdbc implements UserExample {
             join users_to_roles ur on r.id = ur.role_id
             where user_id = ? and r.name = 'admin'
             """;
-
+    private static final String SELECT_USER_BY_EMAIL_AND_PASSWORD =
+            "SELECT id, email, password FROM users WHERE email = ? AND password = ?";
+    private static final String GetCHECK_IF_EMAIL_EXISTSUsers =
+            "SELECT COUNT(1) FROM users WHERE email = ?";
+    private static final String CHECK_IF_USERNAME_EXISTS =
+            "SELECT COUNT(1) FROM users WHERE username = ?";
+    private static final String INSERT_NEW_USER =
+            "INSERT INTO users (email, password, username) VALUES (?, ?, ?) RETURNING id";
+    private static final String ASSIGN_ROLE_TO_USER =
+            "INSERT INTO users_to_roles (user_id, role_id) " + "SELECT ?, id FROM roles WHERE name = ?";
+    private static final String InsertUsersRolesId =
+            "SELECT r.id, r.name FROM roles r " +
+                    "JOIN users_to_roles ur ON r.id = ur.role_id WHERE ur.user_id = ?";
     private final Connection connection;
     private static final String DATABASE_URL = "jdbc:postgresql://localhost:5432/postgres";
 
@@ -24,9 +36,9 @@ public class UserServiceJdbc implements UserExample {
         connection = DriverManager.getConnection(DATABASE_URL, "testuser", "testpass");
     }
 
+
     public User getUserByLoginAndPassword(String login, String password) {
-        String query = "SELECT id, email, password FROM users WHERE email = ? AND password = ?";
-        try (PreparedStatement ps = connection.prepareStatement(query)) {
+        try (PreparedStatement ps = connection.prepareStatement(SELECT_USER_BY_EMAIL_AND_PASSWORD)) {
             ps.setString(1, login);
             ps.setString(2, password);
             try (ResultSet rs = ps.executeQuery()) {
@@ -45,8 +57,7 @@ public class UserServiceJdbc implements UserExample {
     }
 
     public boolean isLoginExists(String login) {
-        String query = "SELECT COUNT(1) FROM users WHERE email = ?";
-        try (PreparedStatement stmt = connection.prepareStatement(query)) {
+        try (PreparedStatement stmt = connection.prepareStatement(GetCHECK_IF_EMAIL_EXISTSUsers)) {
             stmt.setString(1, login);
             try (ResultSet rs = stmt.executeQuery()) {
                 if (rs.next()) {
@@ -59,9 +70,10 @@ public class UserServiceJdbc implements UserExample {
         return false;
     }
 
+
     public boolean isUsernameExists(String username) {
-        String query = "SELECT COUNT(1) FROM users WHERE username = ?";
-        try (PreparedStatement stmt = connection.prepareStatement(query)) {
+
+        try (PreparedStatement stmt = connection.prepareStatement(CHECK_IF_USERNAME_EXISTS)) {
             stmt.setString(1, username);
             try (ResultSet rs = stmt.executeQuery()) {
                 if (rs.next()) {
@@ -75,14 +87,13 @@ public class UserServiceJdbc implements UserExample {
     }
 
     public int registerUser(String login, String password, String username) throws SQLException {
-        String query = "INSERT INTO users (email, password, username) VALUES (?, ?, ?) RETURNING id";
-        try (PreparedStatement stmt = connection.prepareStatement(query)) {
+        try (PreparedStatement stmt = connection.prepareStatement(INSERT_NEW_USER)) {
             stmt.setString(1, login);
             stmt.setString(2, password);
             stmt.setString(3, username);
             try (ResultSet rs = stmt.executeQuery()) {
                 if (rs.next()) {
-                    return rs.getInt(1);  // Возвращаем id нового пользователя
+                    return rs.getInt(1);
                 }
             }
         }
@@ -90,20 +101,18 @@ public class UserServiceJdbc implements UserExample {
     }
 
     public void assignUserRole(int userId, String role) throws SQLException {
-        String query = "INSERT INTO users_to_roles (user_id, role_id) " +
-                "SELECT ?, id FROM roles WHERE name = ?";
-        try (PreparedStatement stmt = connection.prepareStatement(query)) {
+
+        try (PreparedStatement stmt = connection.prepareStatement(ASSIGN_ROLE_TO_USER)) {
             stmt.setInt(1, userId);
             stmt.setString(2, role);
             stmt.executeUpdate();
         }
     }
 
+
     public List<Role> getRolesForUser(int userId) throws SQLException {
         List<Role> roles = new ArrayList<>();
-        String query = "SELECT r.id, r.name FROM roles r " +
-                "JOIN users_to_roles ur ON r.id = ur.role_id WHERE ur.user_id = ?";
-        try (PreparedStatement stmt = connection.prepareStatement(query)) {
+        try (PreparedStatement stmt = connection.prepareStatement(InsertUsersRolesId)) {
             stmt.setInt(1, userId);
             try (ResultSet rs = stmt.executeQuery()) {
                 while (rs.next()) {

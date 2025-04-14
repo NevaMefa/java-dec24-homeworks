@@ -70,7 +70,7 @@ public class ClientHand {
                         if (message.startsWith("/")) {
                             if (message.startsWith("/kick ")) {
                                 System.out.println("Команда /kick получена: " + message);
-                                if (!role.equals("ADMIN")) {
+                                if (!role.equals(Role.ADMIN.name())) {
                                     sendMsg("Ошибка! У вас нет прав на использование этой команды");
                                     continue;
                                 }

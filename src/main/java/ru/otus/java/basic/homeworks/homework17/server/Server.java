@@ -91,6 +91,7 @@ public class Server {
                 client.sendMsg("/kicked");
                 client.sendMsg("Вы были отключены администратором " + admin.getUsername());
                 clientToKick = client;
+                client.disconnect();
                 break;
             }
         }
