@@ -13,34 +13,24 @@ public class HttpServer {
         this.dispatcher = new Dispatcher();
     }
 
-
     public void start() {
         try (ServerSocket serverSocket = new ServerSocket(port)) {
             System.out.println("Сервер запущен на порту: " + port);
             while (true) {
-                Socket socket = serverSocket.accept();
-                new Thread(() -> handleClient(socket)).start(); // 💥 Поток на каждый запрос
+                try (Socket socket = serverSocket.accept()) {
+                    byte[] buffer = new byte[8192];
+                    int n = socket.getInputStream().read(buffer);
+                    if (n < 0) {
+                        System.out.println("Получено битое сообщение");
+                        continue;
+                    }
+                    String rawRequest = new String(buffer, 0, n);
+                    HttpRequest request = new HttpRequest(rawRequest);
+                    request.info(true);
+                    dispatcher.execute(request, socket.getOutputStream());
+                }
             }
         } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
-
-    private void handleClient(Socket socket) {
-        try (socket) {
-            byte[] buffer = new byte[8192];
-            int n = socket.getInputStream().read(buffer);
-            if (n < 0) {
-                System.out.println("Получено битое сообщение");
-                return;
-            }
-            String rawRequest = new String(buffer, 0, n);
-            HttpRequest request = new HttpRequest(rawRequest);
-            request.info(true);
-            OutputStream out = socket.getOutputStream();
-            dispatcher.execute(request, out);
-        } catch (Exception e) {
-            System.out.println("Ошибка при обработке запроса: " + e.getMessage());
             e.printStackTrace();
         }
     }
