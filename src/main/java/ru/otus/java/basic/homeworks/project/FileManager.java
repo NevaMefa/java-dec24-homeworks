@@ -41,6 +41,9 @@ public class FileManager {
             case "help":
                 help();
                 break;
+            case "mkdir":
+                mkdir(parts);
+                break;
             default:
                 System.out.println("Неизвестная команда: " + command);
         }
@@ -50,6 +53,7 @@ public class FileManager {
         System.out.println("Доступные команды:");
         System.out.println("ls [-i]          - список файлов в текущем каталоге");
         System.out.println("cd [path]        - перейти в указанный каталог (cd .. — вверх)");
+        System.out.println("mkdir [name]     - создание новой директории");
         System.out.println("help             - список команд");
         System.out.println("exit             - выход из программы");
     }
@@ -108,6 +112,32 @@ public class FileManager {
                     System.out.println("  - " + dir.getName());
                 }
             }
+        }
+    }
+
+    private static void mkdir(String[] args) {
+        if (args.length < 2) {
+            System.out.println("Укажите имя директории для создания (например, mkdir папка)");
+            return;
+        }
+
+        String dirName = args[1];
+
+        if (dirName.matches(".*[<>:\"/\\\\|?*].*")) {
+            System.out.println("Ошибка: имя содержит недопустимые символы.");
+            return;
+        }
+
+        File newDir = new File(currentDir, dirName);
+        if (newDir.exists()) {
+            System.out.println("Директория уже существует: " + dirName);
+            return;
+        }
+
+        if (newDir.mkdir()) {
+            System.out.println("Директория создана: " + newDir.getAbsolutePath());
+        } else {
+            System.out.println("Не удалось создать директорию: " + dirName);
         }
     }
 }
