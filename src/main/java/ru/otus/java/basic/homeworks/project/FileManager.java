@@ -3,6 +3,7 @@ package ru.otus.java.basic.homeworks.project;
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
+import java.nio.file.StandardCopyOption;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Scanner;
@@ -60,10 +61,26 @@ public class FileManager {
         }
     }
 
+    private static void help() {
+        System.out.println("Доступные команды:");
+        System.out.println("ls [-i]          - список файлов в текущем каталоге");
+        System.out.println("cd [path]        - перейти в указанный каталог (cd .. — вверх)");
+        System.out.println("mv [source] [destination] [-f]     - переименовать/перенести файл или директорию, -f для перезаписи уже существующего");
+        System.out.println("cp [source] [destination] [-f]     - скопировать файл, -f для перезаписи уже существующего");
+        System.out.println("mkdir [name]     - создание новой директории");
+        System.out.println("help             - список команд");
+        System.out.println("rm [name]        - удаление файла или директории (в т.ч. непустых)");
+        System.out.println("exit             - выход из программы");
+    }
+
     private static void cp(String[] args) {
         if (args.length < 3) {
             System.out.println("Нужно указать исходное и конечное место: mv [истоник] [назначение]");
             return;
+        }
+        boolean force = false;
+        if (args.length > 3 && args[3].equals("-f")) {
+            force = true;
         }
 
         File source = new File(currentDir, args[1]);
@@ -74,29 +91,17 @@ public class FileManager {
             return;
         }
 
-        if (!dest.exists()) {
+        if (!dest.exists() && !force) {
             System.out.println("Файл назначения уже существует, используйте -f для перезаписи: ");
             return;
         }
 
         try {
-            Files.copy(source.toPath(), dest.toPath());
+            Files.copy(source.toPath(), dest.toPath(), StandardCopyOption.REPLACE_EXISTING);
             System.out.println("Файл скопирован");
         } catch (IOException e) {
             System.out.println("Ошибка копирования: " + e.getMessage());
         }
-    }
-
-    private static void help() {
-        System.out.println("Доступные команды:");
-        System.out.println("ls [-i]          - список файлов в текущем каталоге");
-        System.out.println("cd [path]        - перейти в указанный каталог (cd .. — вверх)");
-        System.out.println("mv [source] [destination]      - переименовать/перенести файл или директорию");
-        System.out.println("cp [source] [destination]      - скопировать файл");
-        System.out.println("mkdir [name]     - создание новой директории");
-        System.out.println("help             - список команд");
-        System.out.println("rm [name]        - удаление файла или директории (в т.ч. непустых)");
-        System.out.println("exit             - выход из программы");
     }
 
     private static void mv(String[] args) {
@@ -105,12 +110,17 @@ public class FileManager {
             return;
         }
 
+
         String sourceName = args[1];
         String destName = args[2];
 
         if (sourceName.matches(".*[<>:\"/\\\\|?*].*") || destName.matches(".*[<>:\"/\\\\|?*].*")) {
             System.out.println("Ошибка: имя содержит недопустимые символы.");
             return;
+        }
+        boolean force = false;
+        if (args.length > 3 && args[3].equals("-f")) {
+            force = true;
         }
 
         File source = new File(currentDir, sourceName);
@@ -121,8 +131,9 @@ public class FileManager {
             return;
         }
 
-        if (!dest.exists()) {
+        if (!dest.exists() && !force) {
             System.out.println("Файл  или папка уже существуют: " + destName);
+            System.out.println("Используйте ключ -f для перезаписи");
             return;
         }
 
