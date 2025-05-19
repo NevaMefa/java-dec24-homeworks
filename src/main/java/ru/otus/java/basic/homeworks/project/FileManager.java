@@ -61,6 +61,10 @@ public class FileManager {
         }
     }
 
+    private static boolean containsInvalidChars(String name) {
+        return name.matches(".*[<>:\"/\\\\|?*].*");
+    }
+
     private static void help() {
         System.out.println("Доступные команды:");
         System.out.println("ls [-i]          - список файлов в текущем каталоге");
@@ -114,7 +118,7 @@ public class FileManager {
         String sourceName = args[1];
         String destName = args[2];
 
-        if (sourceName.matches(".*[<>:\"/\\\\|?*].*") || destName.matches(".*[<>:\"/\\\\|?*].*")) {
+        if (containsInvalidChars(sourceName) || containsInvalidChars(destName)) {
             System.out.println("Ошибка: имя содержит недопустимые символы.");
             return;
         }
@@ -153,8 +157,8 @@ public class FileManager {
 
         String name = args[1];
 
-        if (name.matches(".*[<>:\"/\\\\|?*].*")) {
-            System.out.println("Ошибка: путь содержит недопустимые символы.");
+        if (containsInvalidChars(name)) {
+            System.out.println("Ошибка: имя содержит недопустимые символы.");
             return;
         }
 
@@ -210,8 +214,8 @@ public class FileManager {
 
         String pathArg = args[1];
 
-        if (pathArg.matches(".*[<>:\"/\\\\|?*].*")) {
-            System.out.println("Ошибка: путь содержит недопустимые символы.");
+        if (containsInvalidChars(pathArg)) {
+            System.out.println("Ошибка: имя содержит недопустимые символы.");
             return;
         }
 
@@ -245,7 +249,7 @@ public class FileManager {
 
         String dirName = args[1];
 
-        if (dirName.matches(".*[<>:\"/\\\\|?*].*")) {
+        if (containsInvalidChars(dirName)) {
             System.out.println("Ошибка: имя содержит недопустимые символы.");
             return;
         }
