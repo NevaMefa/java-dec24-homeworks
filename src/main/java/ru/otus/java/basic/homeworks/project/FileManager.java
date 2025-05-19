@@ -1,6 +1,8 @@
 package ru.otus.java.basic.homeworks.project;
 
 import java.io.File;
+import java.io.IOException;
+import java.nio.file.Files;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Scanner;
@@ -50,13 +52,39 @@ public class FileManager {
             case "mv":
                 mv(parts);
                 break;
+            case "cp":
+                cp(parts);
+                break;
             default:
                 System.out.println("Неизвестная команда: " + command);
         }
     }
 
-    private static void mv(String[] args){
+    private static void cp(String[] args) {
+        if (args.length < 3) {
+            System.out.println("Нужно указать исходное и конечное место: mv [истоник] [назначение]");
+            return;
+        }
 
+        File source = new File(currentDir, args[1]);
+        File dest = new File(currentDir, args[2]);
+
+        if (!source.exists()) {
+            System.out.println("Источник не найден: " + args[1]);
+            return;
+        }
+
+        if (!dest.exists()) {
+            System.out.println("Файл назначения уже существует, используйте -f для перезаписи: ");
+            return;
+        }
+
+        try {
+            Files.copy(source.toPath(), dest.toPath());
+            System.out.println("Файл скопирован");
+        } catch (IOException e) {
+            System.out.println("Ошибка копирования: " + e.getMessage());
+        }
     }
 
     private static void help() {
@@ -64,11 +92,46 @@ public class FileManager {
         System.out.println("ls [-i]          - список файлов в текущем каталоге");
         System.out.println("cd [path]        - перейти в указанный каталог (cd .. — вверх)");
         System.out.println("mv [source] [destination]      - переименовать/перенести файл или директорию");
+        System.out.println("cp [source] [destination]      - скопировать файл");
         System.out.println("mkdir [name]     - создание новой директории");
         System.out.println("help             - список команд");
-        System.out.println("rm [name]         - удаление файла или директории (в т.ч. непустых)");
+        System.out.println("rm [name]        - удаление файла или директории (в т.ч. непустых)");
         System.out.println("exit             - выход из программы");
+    }
 
+    private static void mv(String[] args) {
+        if (args.length < 3) {
+            System.out.println("Нужно указать исходный и целевой путь: mv [истоник] [назначение]");
+            return;
+        }
+
+        String sourceName = args[1];
+        String destName = args[2];
+
+        if (sourceName.matches(".*[<>:\"/\\\\|?*].*") || destName.matches(".*[<>:\"/\\\\|?*].*")) {
+            System.out.println("Ошибка: имя содержит недопустимые символы.");
+            return;
+        }
+
+        File source = new File(currentDir, sourceName);
+        File dest = new File(currentDir, destName);
+
+        if (!source.exists()) {
+            System.out.println("Источник не найден: " + sourceName);
+            return;
+        }
+
+        if (!dest.exists()) {
+            System.out.println("Файл  или папка уже существуют: " + destName);
+            return;
+        }
+
+        boolean success = source.renameTo(dest);
+        if (success) {
+            System.out.println("Успешно перемещено/переименовано " + sourceName + " -> " + destName);
+        } else {
+            System.out.println("Не удалось переместить/переименовать" + sourceName);
+        }
     }
 
     private static void rm(String[] args) {
