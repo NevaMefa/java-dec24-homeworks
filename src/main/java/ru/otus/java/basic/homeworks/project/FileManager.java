@@ -95,7 +95,7 @@ public class FileManager {
             return;
         }
 
-        if (!dest.exists() && !force) {
+        if (dest.exists() && !force) {
             System.out.println("Файл назначения уже существует, используйте -f для перезаписи: ");
             return;
         }
