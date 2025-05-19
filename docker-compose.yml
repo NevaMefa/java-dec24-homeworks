@@ -1,13 +1,14 @@
 services:
-  server:
-    image: postgres
-    container_name: postgres
+  db:
+    image: postgres:17
+    container_name: postgres_db
+    restart: always
     ports:
       - "5432:5432"
     environment:
-      - POSTGRES_USER=testuser
-      - POSTGRES_PASSWORD=testpass
-      - POSTGRES_DB=postgres
+      POSTGRES_USER: testuser
+      POSTGRES_PASSWORD: testpass
+      POSTGRES_DB: postgres
     volumes:
       - postgres_data:/var/lib/postgresql/data
 

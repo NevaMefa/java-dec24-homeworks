@@ -44,18 +44,66 @@ public class FileManager {
             case "mkdir":
                 mkdir(parts);
                 break;
+            case "rm":
+                rm(parts);
+                break;
+            case "mv":
+                mv(parts);
+                break;
             default:
                 System.out.println("Неизвестная команда: " + command);
         }
+    }
+
+    private static void mv(String[] args){
+
     }
 
     private static void help() {
         System.out.println("Доступные команды:");
         System.out.println("ls [-i]          - список файлов в текущем каталоге");
         System.out.println("cd [path]        - перейти в указанный каталог (cd .. — вверх)");
+        System.out.println("mv [source] [destination]      - переименовать/перенести файл или директорию");
         System.out.println("mkdir [name]     - создание новой директории");
         System.out.println("help             - список команд");
+        System.out.println("rm [name]         - удаление файла или директории (в т.ч. непустых)");
         System.out.println("exit             - выход из программы");
+
+    }
+
+    private static void rm(String[] args) {
+        if (args.length < 2) {
+            System.out.println("Укажите имя файла или директории для удаления (например, rm файл.txt)");
+            return;
+        }
+
+        String name = args[1];
+
+        if (name.matches(".*[<>:\"/\\\\|?*].*")) {
+            System.out.println("Ошибка: путь содержит недопустимые символы.");
+            return;
+        }
+
+        File target = new File(currentDir, name);
+
+        if (!target.exists()) {
+            System.out.println("Файл  или директория не найдены: " + name);
+            return;
+        }
+
+        boolean success;
+        if (target.isDirectory()) {
+            success = deleteDirectoryRecursively(target);
+        } else {
+            success = target.delete();
+        }
+
+        if (success) {
+            System.out.println("Успешно удалено: " + target.getName());
+        } else {
+            System.out.println("Не удалось удалить: " + target.getName());
+        }
+
     }
 
     private static void ls(String[] args) {
@@ -139,5 +187,23 @@ public class FileManager {
         } else {
             System.out.println("Не удалось создать директорию: " + dirName);
         }
+    }
+
+    private static boolean deleteDirectoryRecursively(File dir) {
+        File[] allContents = dir.listFiles();
+        if (allContents != null) {
+            for (File file : allContents) {
+                if (file.isDirectory()) {
+                    if (!deleteDirectoryRecursively(file)) {
+                        return false;
+                    }
+                } else {
+                    if (!file.delete()) {
+                        return false;
+                    }
+                }
+            }
+        }
+        return dir.delete();
     }
 }
