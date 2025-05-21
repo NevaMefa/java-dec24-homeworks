@@ -14,6 +14,11 @@ public class LsCommand implements Command {
     }
 
     @Override
+    public String getDescription() {
+        return "ls [-i]                     - список файлов в текущем каталоге";
+    }
+
+    @Override
     public void execute(String[] args) {
         File[] files = FileManager1.currentDir.listFiles();
         if (files == null) {

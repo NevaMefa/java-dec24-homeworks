@@ -9,6 +9,11 @@ public class ExitCommand implements Command {
     }
 
     @Override
+    public String getDescription() {
+        return "exit                        - выход из программы";
+    }
+
+    @Override
     public void execute(String[] args) {
         System.out.println("Завершение работы.");
         System.exit(0);

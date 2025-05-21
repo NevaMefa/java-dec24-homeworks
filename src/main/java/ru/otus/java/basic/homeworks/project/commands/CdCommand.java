@@ -12,6 +12,11 @@ public class CdCommand implements Command {
     }
 
     @Override
+    public String getDescription() {
+        return "cd [path]                   - перейти в указанный каталог (cd .. — вверх)";
+    }
+
+    @Override
     public void execute(String[] args) {
         if (args.length < 2) {
             System.out.println("Укажите путь для перехода (например, cd папка)");

@@ -15,8 +15,10 @@ public class CommandExecutor {
         register(new RmCommand());
         register(new CpCommand());
         register(new MvCommand());
+        register(new FinfoCommand());
         register(new HelpCommand(this));
         register(new ExitCommand());
+
     }
 
     private void register(Command command) {
@@ -37,6 +39,9 @@ public class CommandExecutor {
 
     public Iterable<String> getAvailableCommandNames() {
         return commands.keySet();
+    }
+    public Iterable<Command> getAllCommands() {
+        return commands.values();
     }
 }
 

@@ -12,6 +12,11 @@ public class MkdirCommand implements Command {
     }
 
     @Override
+    public String getDescription() {
+        return "mkdir [name]                - создание новой директории";
+    }
+
+    @Override
     public void execute(String[] args) {
         if (args.length < 2) {
             System.out.println("Укажите имя директории для создания (например, mkdir папка)");

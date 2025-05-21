@@ -15,6 +15,11 @@ public class CpCommand implements Command {
     }
 
     @Override
+    public String getDescription() {
+        return "cp [source] [destination] [-f]     - скопировать файл, -f для перезаписи уже существующего";
+    }
+
+    @Override
     public void execute(String[] args) {
         if (args.length < 3) {
             System.out.println("Нужно указать исходное и конечное место: cp [источник] [назначение]");

@@ -12,6 +12,11 @@ public class MvCommand implements Command {
     }
 
     @Override
+    public String getDescription() {
+        return "mv [source] [dest] [-f]     - переименовать/перенести файл/директорию, -f для перезаписи";
+    }
+
+    @Override
     public void execute(String[] args) {
         if (args.length < 3) {
             System.out.println("Нужно указать исходный и целевой путь: mv [источник] [назначение]");

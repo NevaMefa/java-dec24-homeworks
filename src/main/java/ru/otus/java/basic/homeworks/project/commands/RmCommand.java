@@ -12,6 +12,11 @@ public class RmCommand implements Command {
     }
 
     @Override
+    public String getDescription() {
+        return "rm [name]                   - удаление файла или директории (в т.ч. непустых)";
+    }
+
+    @Override
     public void execute(String[] args) {
         if (args.length < 2) {
             System.out.println("Укажите имя файла или директории для удаления (например, rm файл.txt)");

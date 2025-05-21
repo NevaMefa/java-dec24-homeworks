@@ -18,9 +18,13 @@ public class HelpCommand implements Command {
     @Override
     public void execute(String[] args) {
         System.out.println("Доступные команды:");
-        for (String cmd : executor.getAvailableCommandNames()) {
-            System.out.println(" - " + cmd);
+        for (Command command : executor.getAllCommands()) {
+            System.out.println(" - " + command.getDescription());
         }
-        System.out.println("finfo [filename] – получить подробную информацию о файле");
+    }
+
+    @Override
+    public String getDescription() {
+        return "help                        - список команд";
     }
 }
