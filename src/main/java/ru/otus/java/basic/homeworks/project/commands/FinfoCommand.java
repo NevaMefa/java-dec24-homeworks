@@ -16,6 +16,7 @@ public class FinfoCommand implements Command {
     public String getDescription() {
         return "finfo [filename]            – получить подробную информацию о файле";
     }
+
     @Override
     public void execute(String[] args) {
         if (args.length < 2) {

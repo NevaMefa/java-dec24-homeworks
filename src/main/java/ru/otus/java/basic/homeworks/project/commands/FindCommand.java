@@ -33,6 +33,7 @@ public class FindCommand implements Command {
             System.out.println("Файл \"" + targetName + "\" не найден.");
         }
     }
+
     private boolean searchRecursive(File dir, String targetName) {
         File[] files = dir.listFiles();
         if (files == null) return false;

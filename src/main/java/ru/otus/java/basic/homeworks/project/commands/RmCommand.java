@@ -13,7 +13,7 @@ public class RmCommand implements Command {
 
     @Override
     public String getDescription() {
-        return "rm [name]                   - удаление файла или директории (в т.ч. непустых)";
+        return "rm [name]         ∆          - удаление файла или директории (в т.ч. непустых)";
     }
 
     @Override

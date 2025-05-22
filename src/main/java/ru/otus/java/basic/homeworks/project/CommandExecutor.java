@@ -39,9 +39,6 @@ public class CommandExecutor {
         }
     }
 
-    public Iterable<String> getAvailableCommandNames() {
-        return commands.keySet();
-    }
     public Iterable<Command> getAllCommands() {
         return commands.values();
     }
