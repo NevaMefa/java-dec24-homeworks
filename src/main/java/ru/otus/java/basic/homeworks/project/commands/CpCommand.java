@@ -1,7 +1,7 @@
 package ru.otus.java.basic.homeworks.project.commands;
 
 import ru.otus.java.basic.homeworks.project.Command;
-import ru.otus.java.basic.homeworks.project.FileManager1;
+import ru.otus.java.basic.homeworks.project.FileManager;
 
 import java.io.File;
 import java.io.IOException;
@@ -27,8 +27,8 @@ public class CpCommand implements Command {
         }
 
         boolean force = args.length > 3 && args[3].equals("-f");
-        File source = new File(FileManager1.currentDir, args[1]);
-        File dest = new File(FileManager1.currentDir, args[2]);
+        File source = new File(FileManager.currentDir, args[1]);
+        File dest = new File(FileManager.currentDir, args[2]);
 
         if (!source.exists()) {
             System.out.println("Источник не найден: " + args[1]);

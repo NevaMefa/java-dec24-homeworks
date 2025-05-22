@@ -1,7 +1,7 @@
 package ru.otus.java.basic.homeworks.project.commands;
 
 import ru.otus.java.basic.homeworks.project.Command;
-import ru.otus.java.basic.homeworks.project.FileManager1;
+import ru.otus.java.basic.homeworks.project.FileManager;
 
 import java.io.File;
 
@@ -30,7 +30,7 @@ public class RmCommand implements Command {
             return;
         }
 
-        File target = new File(FileManager1.currentDir, name);
+        File target = new File(FileManager.currentDir, name);
 
         if (!target.exists()) {
             System.out.println("Файл или директория не найдены: " + name);

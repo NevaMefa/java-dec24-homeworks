@@ -1,7 +1,7 @@
 package ru.otus.java.basic.homeworks.project.commands;
 
 import ru.otus.java.basic.homeworks.project.Command;
-import ru.otus.java.basic.homeworks.project.FileManager1;
+import ru.otus.java.basic.homeworks.project.FileManager;
 
 import java.io.File;
 
@@ -23,7 +23,7 @@ public class FinfoCommand implements Command {
             return;
         }
 
-        File file = new File(FileManager1.currentDir, args[1]);
+        File file = new File(FileManager.currentDir, args[1]);
         if (!file.exists()) {
             System.out.println("Файл не найден: " + args[1]);
             return;

@@ -4,13 +4,15 @@ import ru.otus.java.basic.homeworks.project.commands.*;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.TreeMap;
 
 public class CommandExecutor {
-    private final Map<String, Command> commands = new HashMap<>();
+    private final Map<String, Command> commands = new TreeMap<>();
 
     public CommandExecutor() {
         register(new LsCommand());
         register(new CdCommand());
+        register(new FindCommand());
         register(new MkdirCommand());
         register(new RmCommand());
         register(new CpCommand());

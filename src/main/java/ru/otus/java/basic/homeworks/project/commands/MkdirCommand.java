@@ -1,7 +1,7 @@
 package ru.otus.java.basic.homeworks.project.commands;
 
 import ru.otus.java.basic.homeworks.project.Command;
-import ru.otus.java.basic.homeworks.project.FileManager1;
+import ru.otus.java.basic.homeworks.project.FileManager;
 
 import java.io.File;
 
@@ -30,7 +30,7 @@ public class MkdirCommand implements Command {
             return;
         }
 
-        File newDir = new File(FileManager1.currentDir, dirName);
+        File newDir = new File(FileManager.currentDir, dirName);
         if (newDir.exists()) {
             System.out.println("Директория уже существует: " + dirName);
         } else if (newDir.mkdir()) {

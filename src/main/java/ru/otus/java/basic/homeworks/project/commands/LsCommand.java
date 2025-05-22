@@ -1,7 +1,7 @@
 package ru.otus.java.basic.homeworks.project.commands;
 
 import ru.otus.java.basic.homeworks.project.Command;
-import ru.otus.java.basic.homeworks.project.FileManager1;
+import ru.otus.java.basic.homeworks.project.FileManager;
 
 import java.io.File;
 import java.text.SimpleDateFormat;
@@ -20,7 +20,7 @@ public class LsCommand implements Command {
 
     @Override
     public void execute(String[] args) {
-        File[] files = FileManager1.currentDir.listFiles();
+        File[] files = FileManager.currentDir.listFiles();
         if (files == null) {
             System.out.println("Ошибка чтения каталога.");
             return;

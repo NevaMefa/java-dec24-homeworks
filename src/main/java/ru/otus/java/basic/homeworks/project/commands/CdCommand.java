@@ -1,7 +1,7 @@
 package ru.otus.java.basic.homeworks.project.commands;
 
 import ru.otus.java.basic.homeworks.project.Command;
-import ru.otus.java.basic.homeworks.project.FileManager1;
+import ru.otus.java.basic.homeworks.project.FileManager;
 
 import java.io.File;
 
@@ -30,12 +30,12 @@ public class CdCommand implements Command {
             return;
         }
 
-        File newDir = pathArg.equals("..") ? FileManager1.currentDir.getParentFile()
-                : new File(FileManager1.currentDir, pathArg);
+        File newDir = pathArg.equals("..") ? FileManager.currentDir.getParentFile()
+                : new File(FileManager.currentDir, pathArg);
 
         if (newDir != null && newDir.exists() && newDir.isDirectory()) {
-            FileManager1.currentDir = newDir;
-            System.out.println("Перешли в каталог: " + FileManager1.currentDir.getAbsolutePath());
+            FileManager.currentDir = newDir;
+            System.out.println("Перешли в каталог: " + FileManager.currentDir.getAbsolutePath());
         } else {
             System.out.println("Каталог не найден: " + pathArg);
         }
